@@ -55,6 +55,18 @@ STANDARDS:
 * **data** - data for the running image.
 * **log**  - log files from within the container get written here. This is more convenient than having to open a shell within the container to read the logs.
 
+#### This Container
+
+* Add `ProxyPassMatch ^/(.*\.php)$ fcgi://127.0.0.1:9000/var/www/html/$1` to the sites-available/sitename.conf file
+* Install apache2 libapache2-mod-php7.2 php7.2-fpm 
+* a2enmod proxy_fcgi
+* edit /etc/php/7.2/fpm/pool.d/www.conf to change the 'listen' to use a TCP socket (because I couldn't get it to work with a Unix domain socket)
+* Create an index.php to display phpinfo
+* service php7.2-fpm start
+* apachectl start
+
+
+
 ## Authors
 
 * **Kevin Kleinfelter** - * - [kleinfelter](https://github.com/kleinfelter)
