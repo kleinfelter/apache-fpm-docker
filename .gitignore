@@ -1,0 +1,4 @@
+*.swp
+*.tmp
+._*
+.DS_Store

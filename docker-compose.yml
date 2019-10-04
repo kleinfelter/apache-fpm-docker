@@ -1,0 +1,35 @@
+version: "3.2"                    # Using version 3 docker-compose file format.
+services:
+    apache-fpm-docker:
+        build: .
+        container_name: apache-fpm-docker
+        network_mode: bridge  # MUST un-comment this line on Mac. MAY un-comment on Linux.
+#        network_mode: host    # MAY use host networking on Linux for better performance.
+        ports:
+        - "80:80"
+        command: /container-bin/container-rc.sh
+
+        volumes:
+
+            - type: bind
+              source: "./conf/apache"
+              target: "/container-apache-conf"
+
+            - type: bind
+              source: "./bin"
+              target: "/container-bin"
+
+# Un-comment the lines below on Linux (not on Mac) if you want your container to use the host's timezone.
+#            - type: bind
+#              source: "/etc/timezone"
+#              target: "/etc/timezone"
+#              read_only: true
+
+#            - type: bind 
+#              source: "/etc/localtime"
+#              target: "/etc/localtime"
+#              read_only: true
+
+
+
+
